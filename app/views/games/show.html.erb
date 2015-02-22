@@ -1,0 +1,72 @@
+<div class="row">
+    <div class="small-12 medium-4 columns">
+        <div id="gallows" class="gallows gallows-state-<%= current_game.failed_attempts %>">
+
+        </div>
+    </div>
+
+    <div class="small-12 medium-8 columns">
+        <div class="row">
+            <div class="small-12 columns">
+                <ul class="word small-block-grid-<%= current_game.word.length %>">
+                    <% current_game.word.split('').each do |letter| %>
+                        <li>
+                            <div class="word-letter">
+                                <%= current_game.finished? || current_game.selected_letters.include?(letter) ? letter : '_' %>
+                            </div>
+                        </li>
+                    <% end %>
+                </ul>
+            </div>
+        </div>
+
+        <% if current_game.finished? %>
+            <div class="row game-status">
+                <div class="small-12 columns text-center">
+                    <% if current_game.guessed? %>
+                        <span class="label success radius">You successfully guessed the word! :)</span>
+                    <% else %>
+                        <span class="label alert radius">No, no... You didn't find the word :(</span>
+                    <% end %>
+                </div>
+            </div>
+        <% end %>
+
+        <%= form_for :game, :url => game_path, :method => :patch do |form| %>
+            <div class="row">
+                <div class="letters">
+                    <% ('A'..'Z').each do |letter| %>
+                        <%
+                            if current_game.selected_letters.include? letter
+                                button_class = current_game.word.include?(letter) ? 'success' : 'alert'
+                            end
+                        %>
+                        <div class="small-2 medium-2 columns text-center">
+                            <div class="letter">
+                                <%= form.submit letter, :name => 'letter', :class => "button expand #{button_class}" %>
+                            </div>
+                        </div>
+                    <% end %>
+                </div>
+            </div>
+        <% end %>
+
+        <div class="row">
+            <div class="game-actions">
+                <div class="small-12 <%= current_game.finished? ? '' : 'medium-6' %> columns">
+                    <%= link_to root_path(:method => :delete), :class => 'button expand' do %>
+                        <i class="fa fa-home"></i> Home
+                    <% end %>
+                </div>
+
+                <% unless current_game.finished? %>
+                    <div class="small-12 medium-6 columns">
+                        <%= link_to game_path, :class => 'button expand alert', :method => :delete do %>
+                            <i class="fa fa-fire"></i> Cancel game
+                        <% end %>
+                    </div>
+                <% end %>
+            </div>
+        </div>
+    </div>
+</div>

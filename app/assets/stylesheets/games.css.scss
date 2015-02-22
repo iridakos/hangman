@@ -1,0 +1,69 @@
+// Place all the styles related to the games controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+
+.gallows {
+  min-height: 460px;
+  margin: 20px 0;
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+
+  &.gallows-state-0 {
+    background-image: image_url('gallows-0.png');
+  }
+
+  &.gallows-state-1 {
+    background-image: image_url('gallows-1.png');
+  }
+
+  &.gallows-state-2 {
+    background-image: image_url('gallows-2.png');
+  }
+
+  &.gallows-state-3 {
+    background-image: image_url('gallows-3.png');
+  }
+
+  &.gallows-state-4 {
+    background-image: image_url('gallows-4.png');
+  }
+
+  &.gallows-state-5 {
+    background-image: image_url('gallows-5.png');
+  }
+}
+
+.word {
+  text-align: center;
+  margin: 50px 0 10px 0;
+
+  .word-letter {
+    font-size: 24px;
+    padding: 4px;
+    border: 1px solid #ccc;
+    min-height: 40px;
+  }
+}
+
+.letters {
+  margin-top: 25px;
+
+  .letter {
+    font-size: 24px;
+    border: 1px solid #ccc;
+    margin-top: 10px;
+
+    input {
+      margin-bottom: 0;
+    }
+  }
+}
+
+.game-status .label {
+  font-size: 20px;
+}
+
+.game-actions {
+  margin-top: 40px;
+}
